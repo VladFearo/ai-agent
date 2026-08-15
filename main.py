@@ -20,6 +20,10 @@ def main():
 
     
     res = client.chat.completions.create(model="openrouter/free", messages=messages)
+    if not res.usage:
+         raise RuntimeError("No usage information returned from the API.")
+    print(f"Prompt tokens: {res.usage.prompt_tokens}")
+    print(f"Response tokens: {res.usage.completion_tokens}")
     print(res.choices[0].message.content)
 
 if __name__ == "__main__":
