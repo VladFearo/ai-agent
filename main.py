@@ -19,7 +19,7 @@ def main():
 ]
 
     
-    res = client.chat.completions.create(model="openrounter/free", messages=messages)
+    res = client.chat.completions.create(model="openrouter/free", messages=messages)
     print(res.choices[0].message.content)
 
 if __name__ == "__main__":
