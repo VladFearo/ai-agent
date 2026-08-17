@@ -1,8 +1,8 @@
 import os
+from path_utils import resolve_path
+
 def get_files_info(working_directory: str, directory: str = ".") -> str:
-    abs_working_directory = os.path.abspath(working_directory)
-    target_dir = os.path.normpath(os.path.join(abs_working_directory, directory))
-    valid_target_dir = os.path.commonpath([abs_working_directory, target_dir]) == abs_working_directory
+    target_dir, valid_target_dir = resolve_path(working_directory, directory)
 
 
     if not valid_target_dir:
@@ -18,6 +18,3 @@ def get_files_info(working_directory: str, directory: str = ".") -> str:
             is_dir = os.path.isdir(os.path.join(target_dir, file))
             str_list.append(f'- {name}: file_size={file_size} bytes, is_dir={is_dir}')
         return "\n".join(str_list)
-            
-
-    

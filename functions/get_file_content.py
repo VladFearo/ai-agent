@@ -1,10 +1,9 @@
 import os
 from config import MAX_CHARS
+from path_utils import resolve_path
 
 def get_file_content(working_directory: str, file_path: str) -> str:
-    abs_working_directory = os.path.abspath(working_directory)
-    target_file = os.path.normpath(os.path.join(abs_working_directory, file_path))
-    valid_target_file = os.path.commonpath([abs_working_directory, target_file]) == abs_working_directory
+    target_file, valid_target_file = resolve_path(working_directory, file_path)
 
     if not valid_target_file:
         return f'Error: Cannot access "{file_path}" as it is outside the permitted working directory'
@@ -20,4 +19,3 @@ def get_file_content(working_directory: str, file_path: str) -> str:
             return content
     except Exception as e:
         return f'Error: Could not read file "{file_path}". Exception: {str(e)}'
-    
