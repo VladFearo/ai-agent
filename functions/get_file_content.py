@@ -1,6 +1,25 @@
 import os
 from config import MAX_CHARS
-from path_utils import resolve_path
+from functions.path_utils import resolve_path
+
+schema_get_file_content = {
+    "type": "function",
+    "function": {
+        "name": "get_file_content",
+        "description": "Reads and returns the contents of a specified file relative to the working directory",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "file_path": {
+                    "type": "string",
+                    "description": "Path of the file to read, relative to the working directory",
+                },
+            },
+            "required": ["file_path"],
+        },
+    },
+}
+
 
 def get_file_content(working_directory: str, file_path: str) -> str:
     target_file, valid_target_file = resolve_path(working_directory, file_path)
