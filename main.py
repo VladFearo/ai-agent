@@ -2,6 +2,7 @@ import os
 from dotenv import load_dotenv
 from openai import OpenAI
 import argparse
+from prompts import system_prompt
 
 def main():
     parser = argparse.ArgumentParser(description="Chatbot")
@@ -18,6 +19,9 @@ def main():
         base_url="https://openrouter.ai/api/v1"
     )
     messages = [
+    {
+        "role": "system", "content": system_prompt
+    },
     {
         "role": "user",
         "content": args.user_prompt
